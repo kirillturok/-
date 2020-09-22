@@ -3,19 +3,26 @@ package com.company;
 import java.util.Scanner;
 
 public class Main {
-static List2<Integer> list2 = new List2<>();
-static List<Integer> list = new List<>();
-    public static void main(String[] args) {
-        System.out.println("Введите номера телефонов. Чтобы закончить ввод, введите 0.");
-        Scanner scanner = new Scanner(System.in);
-        int num;
-        do{
-            num=scanner.nextInt();
-            if(num==0) break;
-            if((num>999&&num<1000000)||num>9999999||num<100){System.out.println("Неверный ввод.Повторите еще раз.");}else{list2.add(num);}
 
-        }while(true);
-        list2.task();
-        list.print();
+    public static List<Abon> list = new List<>();
+
+    public static void main(String[] args) {
+        System.out.println("Введите ФИО и номера телефонов. Введите 0, чтобы завершить ввод");
+        Scanner scan = new Scanner(System.in);
+        String in;
+        do {
+            in = scan.nextLine();
+            if (in.equals("0")) break;
+            String[] a = in.split("\\s+");
+            String fio = a[0] + " " + a[1] + " " + a[2];
+            list.add(new Abon(fio, Integer.parseInt(a[3])));
+        } while (true);
+        do {
+            System.out.println("Введите\n1 - поиск по фамилии\n2 - по номеру\n0 - завершить программу");
+            String inn = scan.nextLine();
+            if (inn.equals("1")) list.byFio();
+            if (inn.equals("2")) list.byNum();
+            if (inn.equals("0")) System.exit(0);
+        } while (true);
     }
 }
